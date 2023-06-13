@@ -5,7 +5,7 @@ class ParkingGarage:
         self.currentTicket = {}
 
     def greet_driver(self):
-        print("\nWelcome to The Nonsense Parking Garage!\n This is an imaginary parking garage where you can pay whatever you want to park as long as you want!\n")
+        print("\nWelcome to The PyOOP Garage!\n This is an imaginary parking garage where you can pay whatever you want to park as long as you want!\n")
     
     def showSpaces(self):
         print(f"\nCurrently available spaces: {len(self.spaces)}")
@@ -58,7 +58,7 @@ class ParkingGarage:
         self.tickets.append(ticket)
         self.spaces.append(space)
         del self.currentTicket[ticket]
-        print("Thank you for choosing The Nonsense Parking Garage. Have a nice day!")
+        print("Thank you for choosing The PyOOP Garage. Have a nice day!")
 
 garage = ParkingGarage(3, 3)
 
