@@ -8,8 +8,7 @@ class ParkingGarage:
         print("\nWelcome to The Nonsense Parking Garage!\n This is an imaginary parking garage where you can pay whatever you want to park as long as you want!\n")
     
     def showSpaces(self):
-        print("\nCurrently available spaces:")
-        print(len(self.spaces))
+        print(f"\nCurrently available spaces: {len(self.spaces)}")
 
     def takeTicket(self):
         if len(self.tickets) == 0:
@@ -29,14 +28,12 @@ class ParkingGarage:
                 else:
                     print("Invalid input. Please try again.")
                     continue
-            print("Thank you for choosing the David's Nonsense Parking Garage")
-            print(f"Please park in space {space}.")
-            print(f"There are now {len(self.spaces)} spaces available.\n")
+            print(f"\nPlease take ticket #{ticket} and park in space #{space}. Thank you.")
         
 
     def payForParking(self):
-        ticket = int(input("\nEnter your ticket number to pay: "))
         while  True:
+            ticket = int(input("What is your ticket number? ")) 
             if ticket not in self.currentTicket:
                 print("\nInvalid ticket number. Please enter the correct ticket number.")
                 continue
@@ -51,22 +48,17 @@ class ParkingGarage:
                 break
 
     def leaveGarage(self):
-        while True:
-            ticket = int(input("Enter your ticket number to leave: "))
-            if ticket not in self.currentTicket:
-                print("Invalid ticket number. Please try again.")
-                continue
-            elif not self.currentTicket[ticket]['paid']:
-                payment_leave = float(input("You have not paid for this ticket yet. Please enter a payment amount: $"))
-                print(f"\nPayment amount of ${payment_leave:.2f} has been accepted.")
-                break
-            else:
-                print("\nYou have already paid for this ticket.") 
+        ticket = int(input("Enter your ticket number to verify payment and leave: "))
+        if not self.currentTicket[ticket]['paid']:
+            payment_leave = float(input("You have not paid for this ticket yet. Please enter a payment amount: $"))
+            print(f"\nPayment amount of ${payment_leave:.2f} has been accepted.")
+        else:
+            print(f"\nThis ticket has been paid.")
         space = self.currentTicket[ticket]['space']
         self.tickets.append(ticket)
         self.spaces.append(space)
         del self.currentTicket[ticket]
-        print("Thank you and have a nice day!")
+        print("Thank you for choosing The Nonsense Parking Garage. Have a nice day!")
 
 garage = ParkingGarage(3, 3)
 
@@ -76,11 +68,12 @@ while True:
     proceed = input("\nWould you like to proceed? (Y/N) ")
     if proceed.lower() == 'y':
         garage.takeTicket()
-        if garage.currentTicket[ticket]['paid']:
-            garage.leaveGarage()
-        else:
-            garage.payForParking()
-            garage.leaveGarage()
+        print("\n .... 2 hours later, time to leave ....")
+        garage.payForParking()
+        print(f"\n......... driving to the exit .........")
+        print(".........")
+        print(".........")
+        garage.leaveGarage()
         break
     elif proceed.lower() == 'n':
         break
